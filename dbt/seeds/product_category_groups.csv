@@ -1,0 +1,5 @@
+product_category,category_group,is_subscription
+gems,hard_currency,false
+special_offer,promotional,false
+battle_pass,subscription,true
+bundle,promotional,false

@@ -1,0 +1,5 @@
+platform,os_family,is_mobile
+ios,apple,true
+android,google,true
+web,browser,false
+pc,desktop,false

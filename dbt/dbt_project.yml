@@ -21,9 +21,11 @@ models:
     stg:
       +materialized: view
       +schema: stg
+      +tags: ['hourly']
     mart:
       +materialized: table
       +schema: mart
+      +tags: ['daily']
 
 seeds:
   game_analytics:

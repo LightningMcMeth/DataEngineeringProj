@@ -1,31 +1,28 @@
-{{ config(materialized='view') }}
+WITH source AS (
 
-with source as (
-
-    select * from {{ source('raw', 'events') }}
+    SELECT * FROM {{ source('raw', 'events') }}
 
 ),
 
-renamed as (
+renamed AS (
 
-    select
-        cast(event_id            as varchar)   as event_id,
-        cast(event_name          as varchar)   as event_name,
-        cast(event_timestamp     as timestamp) as event_ts,
-        cast(player_id           as bigint)    as player_id,
-        cast(session_id          as varchar)   as session_id,
-        cast(platform            as varchar)   as platform,
-        cast(country_code        as varchar)   as country_code,
-        cast(app_version         as varchar)   as app_version,
-        cast(player_level        as integer)   as player_level,
-        cast(arena_id            as integer)   as arena_id,
-        cast(registration_method as varchar)   as registration_method,
-        cast(device_type         as varchar)   as device_type,
-        cast(acquisition_channel as varchar)   as acquisition_channel,
-        date_trunc('day', cast(event_timestamp as timestamp)) as event_date
-
-    from source
+    SELECT
+        cast(event_id AS varchar) AS event_id,
+        cast(event_name AS varchar) AS event_name,
+        cast(event_timestamp AS timestamp) AS event_ts,
+        cast(player_id AS bigint) AS player_id,
+        cast(session_id AS varchar) AS session_id,
+        cast(platform AS varchar) AS platform,
+        cast(country_code AS varchar) AS country_code,
+        cast(app_version AS varchar) AS app_version,
+        cast(player_level AS integer) AS player_level,
+        cast(arena_id AS integer) AS arena_id,
+        cast(registration_method AS varchar) AS registration_method,
+        cast(device_type AS varchar) AS device_type,
+        cast(acquisition_channel AS varchar) AS acquisition_channel,
+        date_trunc('day', cast(event_timestamp AS timestamp)) AS event_date
+    FROM source
 
 )
 
-select * from renamed
+SELECT * FROM renamed

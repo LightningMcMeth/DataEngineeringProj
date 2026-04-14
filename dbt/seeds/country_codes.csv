@@ -1,0 +1,13 @@
+country_code,country_name,region
+US,United States,NA
+CA,Canada,NA
+BR,Brazil,LATAM
+GB,United Kingdom,EU
+DE,Germany,EU
+FR,France,EU
+PL,Poland,EU
+UA,Ukraine,EU
+TR,Turkey,EU
+IN,India,APAC
+JP,Japan,APAC
+AU,Australia,APAC

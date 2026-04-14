@@ -1,0 +1,60 @@
+version: 2
+
+seeds:
+  - name: country_codes
+    description: "ISO2 country codes → country name and region. Довідник для збагачення географії в mart-шарі."
+    columns:
+      - name: country_code
+        description: "ISO 3166-1 alpha-2 код країни."
+        tests:
+          - not_null
+          - unique
+      - name: country_name
+        tests:
+          - not_null
+      - name: region
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['NA', 'LATAM', 'EU', 'APAC']
+
+  - name: product_category_groups
+    description: "Мапінг product_category → бізнесова група категорій."
+    columns:
+      - name: product_category
+        tests:
+          - not_null
+          - unique
+      - name: category_group
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['hard_currency', 'soft_currency', 'promotional', 'subscription', 'cosmetic']
+      - name: is_subscription
+        tests:
+          - not_null
+
+  - name: platform_os_family
+    description: "Мапінг platform → OS family, прапорець mobile."
+    columns:
+      - name: platform
+        tests:
+          - not_null
+          - unique
+      - name: os_family
+        tests:
+          - not_null
+      - name: is_mobile
+        tests:
+          - not_null
+
+  - name: fx_rates
+    description: "Курси валют до USD. Статичний довідник (оновлюється вручну)."
+    columns:
+      - name: currency_code
+        tests:
+          - not_null
+          - unique
+      - name: rate_to_usd
+        tests:
+          - not_null

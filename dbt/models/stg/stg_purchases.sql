@@ -1,36 +1,33 @@
-{{ config(materialized='view') }}
+WITH source AS (
 
-with source as (
-
-    select * from {{ source('raw', 'purchase_transactions') }}
+    SELECT * FROM {{ source('raw', 'purchase_transactions') }}
 
 ),
 
-renamed as (
+renamed AS (
 
-    select
-        cast(transaction_id        as varchar)   as transaction_id,
-        cast(player_id             as bigint)    as player_id,
-        cast(transaction_timestamp as timestamp) as transaction_ts,
-        cast(session_id            as varchar)   as session_id,
-        cast(store_offer_id        as varchar)   as store_offer_id,
-        cast(product_sku           as varchar)   as product_sku,
-        cast(product_name          as varchar)   as product_name,
-        cast(product_category      as varchar)   as product_category,
-        cast(quantity              as integer)   as quantity,
-        cast(gross_amount          as decimal(10,2)) as gross_amount,
-        cast(currency_code         as varchar)   as currency_code,
-        cast(payment_provider      as varchar)   as payment_provider,
-        cast(payment_status        as varchar)   as payment_status,
-        cast(platform              as varchar)   as platform,
-        cast(country_code          as varchar)   as country_code,
-        cast(is_first_purchase     as boolean)   as is_first_purchase,
-        cast(created_at            as timestamp) as created_at,
-        cast(updated_at            as timestamp) as updated_at,
-        date_trunc('day', cast(transaction_timestamp as timestamp)) as transaction_date
-
-    from source
+    SELECT
+        cast(transaction_id AS varchar) AS transaction_id,
+        cast(player_id AS bigint) AS player_id,
+        cast(transaction_timestamp AS timestamp) AS transaction_ts,
+        cast(session_id AS varchar) AS session_id,
+        cast(store_offer_id AS varchar) AS store_offer_id,
+        cast(product_sku AS varchar) AS product_sku,
+        cast(product_name AS varchar) AS product_name,
+        cast(product_category AS varchar) AS product_category,
+        cast(quantity AS integer) AS quantity,
+        cast(gross_amount AS decimal(10,2)) AS gross_amount,
+        cast(currency_code AS varchar) AS currency_code,
+        cast(payment_provider AS varchar) AS payment_provider,
+        cast(payment_status AS varchar) AS payment_status,
+        cast(platform AS varchar) AS platform,
+        cast(country_code AS varchar) AS country_code,
+        cast(is_first_purchase AS boolean) AS is_first_purchase,
+        cast(created_at AS timestamp) AS created_at,
+        cast(updated_at AS timestamp) AS updated_at,
+        date_trunc('day', cast(transaction_timestamp AS timestamp)) AS transaction_date
+    FROM source
 
 )
 
-select * from renamed
+SELECT * FROM renamed

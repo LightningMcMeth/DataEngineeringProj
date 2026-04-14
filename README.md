@@ -92,28 +92,37 @@ AIRFLOW_UID=50000
 
 ## Що лишилось зробити (TODO)
 
-- [ ] **Крок 9. dbt sources**
-  Описати джерела в `dbt/models/raw/sources.yml` — схема `raw`, таблиці `events` і `purchase_transactions`, з базовими тестами (`not_null`, `unique` на ключах).
+- [x] **Крок 9. dbt sources**
+  `dbt/models/raw/sources.yml` — схема `raw`, таблиці `events` і `purchase_transactions` з тестами `not_null`/`unique` на PK.
 
-- [ ] **Крок 10. Staging-моделі (`dbt/models/stg/`)**
-  - `stg_events.sql` — розпарсити `raw.events`, привести типи (`event_time` → TIMESTAMP), витягти ключові поля з JSON.
-  - `stg_purchases.sql` — нормалізувати `raw.purchase_transactions`, каст типів, прибрати дублікати.
-  - Матеріалізація: view.
-  - Додати schema-тести (not_null на PK, accepted_values на event_type тощо).
+- [x] **Крок 10. Staging-моделі (`dbt/models/stg/`)**
+  - `stg_events.sql`, `stg_purchases.sql` — базові view над `source('raw', ...)`, каст типів, додавання `event_date`/`transaction_date`.
+  - 11 event-specific stg-моделей (`stg_registrations`, `stg_sessions_started/ended`, `stg_matches_started/ended`, `stg_level_ups`, `stg_ad_offers_shown`, `stg_ads_watched`, `stg_chests_opened`, `stg_rewards_claimed`, `stg_shop_offers_viewed`) — фільтрові view над `stg_events` по `event_name`.
+  - Матеріалізація: view. Тег: `hourly` (через `dbt_project.yml`).
+  - schema.yml: `not_null`/`unique` на PK, `accepted_values` на `platform`/`payment_status`.
 
-- [ ] **Крок 11. Mart-моделі (`dbt/models/mart/`)**
-  Приклади:
-  - `dim_users.sql` — унікальні користувачі з обох джерел.
-  - `fct_daily_revenue.sql` — агрегація покупок по днях/гравцях.
-  - `fct_user_activity.sql` — сесії/події по користувачах.
-  - Матеріалізація: table.
+- [x] **Крок 11. Mart-моделі (`dbt/models/mart/`)**
+  - 4 seeds у `dbt/seeds/`: `country_codes`, `product_category_groups`, `platform_os_family`, `fx_rates`.
+  - Dim: `dim_dates` (календар), `dim_players` (з обох джерел + seed-збагачення), `dim_products` (SKU каталог).
+  - Fct з window functions:
+    - `fct_daily_revenue` — щоденний revenue. Має обидва теги (`daily` + `hourly`), оновлюється і операційно, і в нічному ран-і.
+    - `fct_player_ltv` — кумулятивний LTV (`sum() over (partition by player_id order by transaction_ts rows between unbounded preceding and current row)`).
+    - `fct_revenue_rolling_7d` — 7-day rolling revenue + `lag()` для day-over-day дельти.
+    - `fct_top_players_by_country` — `rank() over (partition by country_code order by total_gross_usd desc)` + частка revenue гравця від revenue країни.
+  - Матеріалізація: table. Тег: `daily` (через `dbt_project.yml`).
+  - **Разом 20 моделей**: 13 stg + 7 mart.
 
-- [ ] **Крок 12. Інтеграція dbt в Airflow DAG**
-  Додати в `game_analytics_pipeline_dag.py` таски:
-  ```
-  extract_mysql >> load_json >> dbt_run >> dbt_test
-  ```
-  через `BashOperator` (`cd /opt/airflow/dbt && dbt run` / `dbt test`) або Cosmos.
+- [x] **Крок 12. Інтеграція dbt в Airflow**
+  Два окремі DAG-и замість одного, щоб закрити вимогу на hourly/daily розклад:
+  - **`game_analytics_hourly`** (файл `dags/game_analytics_pipeline_dag.py`), schedule `@hourly`:
+    ```
+    extract_mysql_to_duckdb >> load_json_to_duckdb >> dbt_seed >> dbt_build_hourly
+    ```
+    де `dbt_build_hourly` — `BashOperator` з командою `dbt build --select tag:hourly --target dev`.
+  - **`game_analytics_daily`** (файл `dags/game_analytics_daily_dag.py`), schedule `15 3 * * *`:
+    одна таска `dbt_build_daily` з командою `dbt build --select tag:daily --target dev`.
+    Cron з офсетом `:15` замість `:00`, щоб не впиратись у DuckDB-lock з hourly DAG-ом, який стартує на рівній годині.
+  - `dbt build` замість `dbt run` + `dbt test` — бо це те, що прямо прописано в умові завдання, і `build` вже внутрішньо запускає `run` + `test` у правильному порядку з урахуванням залежностей.
 
 - [ ] **Крок 13. Data quality**
   - Додати `dbt test` на ключові моделі.

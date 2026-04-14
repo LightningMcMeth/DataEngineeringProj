@@ -52,3 +52,105 @@ models:
       - name: currency_code
         tests:
           - not_null
+
+  - name: stg_registrations
+    description: "Події реєстрації гравців (player_registered)."
+    columns:
+      - name: event_id
+        tests: [not_null, unique]
+      - name: player_id
+        tests: [not_null]
+      - name: registered_ts
+        tests: [not_null]
+
+  - name: stg_sessions_started
+    description: "Початки ігрових сесій (session_started)."
+    columns:
+      - name: event_id
+        tests: [not_null, unique]
+      - name: session_id
+        tests: [not_null]
+      - name: player_id
+        tests: [not_null]
+      - name: session_started_ts
+        tests: [not_null]
+
+  - name: stg_sessions_ended
+    description: "Завершення ігрових сесій (session_ended)."
+    columns:
+      - name: event_id
+        tests: [not_null, unique]
+      - name: session_id
+        tests: [not_null]
+      - name: player_id
+        tests: [not_null]
+
+  - name: stg_matches_started
+    description: "Початки матчів (match_started)."
+    columns:
+      - name: event_id
+        tests: [not_null, unique]
+      - name: player_id
+        tests: [not_null]
+      - name: match_started_ts
+        tests: [not_null]
+
+  - name: stg_matches_ended
+    description: "Завершення матчів (match_ended)."
+    columns:
+      - name: event_id
+        tests: [not_null, unique]
+      - name: player_id
+        tests: [not_null]
+      - name: match_ended_ts
+        tests: [not_null]
+
+  - name: stg_level_ups
+    description: "Події підвищення рівня (level_up)."
+    columns:
+      - name: event_id
+        tests: [not_null, unique]
+      - name: player_id
+        tests: [not_null]
+      - name: new_level
+        tests: [not_null]
+
+  - name: stg_ad_offers_shown
+    description: "Показ оферів реклами (ad_offer_shown)."
+    columns:
+      - name: event_id
+        tests: [not_null, unique]
+      - name: player_id
+        tests: [not_null]
+
+  - name: stg_ads_watched
+    description: "Перегляди рекламних роликів (ad_watched)."
+    columns:
+      - name: event_id
+        tests: [not_null, unique]
+      - name: player_id
+        tests: [not_null]
+
+  - name: stg_chests_opened
+    description: "Відкриття скриньок (chest_opened)."
+    columns:
+      - name: event_id
+        tests: [not_null, unique]
+      - name: player_id
+        tests: [not_null]
+
+  - name: stg_rewards_claimed
+    description: "Отримання нагород (reward_claimed)."
+    columns:
+      - name: event_id
+        tests: [not_null, unique]
+      - name: player_id
+        tests: [not_null]
+
+  - name: stg_shop_offers_viewed
+    description: "Перегляди оферів магазину (shop_offer_viewed)."
+    columns:
+      - name: event_id
+        tests: [not_null, unique]
+      - name: player_id
+        tests: [not_null]

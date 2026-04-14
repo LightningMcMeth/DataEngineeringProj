@@ -1,0 +1,106 @@
+version: 2
+
+models:
+  - name: dim_dates
+    description: "Календарний вимір від першої події до сьогодні."
+    columns:
+      - name: date_day
+        tests:
+          - not_null
+          - unique
+      - name: is_weekend
+        tests:
+          - not_null
+
+  - name: dim_players
+    description: "Вимір гравців (з events + purchases), збагачений країною та OS-family."
+    columns:
+      - name: player_id
+        tests:
+          - not_null
+          - unique
+      - name: country_code
+        tests:
+          - relationships:
+              to: ref('country_codes')
+              field: country_code
+              config:
+                severity: warn
+      - name: platform
+        tests:
+          - relationships:
+              to: ref('platform_os_family')
+              field: platform
+              config:
+                severity: warn
+      - name: is_payer
+        tests:
+          - not_null
+
+  - name: dim_products
+    description: "Вимір SKU, збагачений категорією."
+    columns:
+      - name: product_sku
+        tests:
+          - not_null
+          - unique
+      - name: product_category
+        tests:
+          - not_null
+          - relationships:
+              to: ref('product_category_groups')
+              field: product_category
+              config:
+                severity: warn
+
+  - name: fct_daily_revenue
+    description: "Щоденний revenue (completed транзакції, gross_usd через fx_rates)."
+    columns:
+      - name: date_day
+        tests:
+          - not_null
+          - unique
+      - name: gross_revenue_usd
+        tests:
+          - not_null
+
+  - name: fct_player_ltv
+    description: "Кумулятивний LTV гравця (window: sum over partition by player_id)."
+    columns:
+      - name: transaction_id
+        tests:
+          - not_null
+          - unique
+      - name: player_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_players')
+              field: player_id
+      - name: cumulative_ltv_usd
+        tests:
+          - not_null
+
+  - name: fct_revenue_rolling_7d
+    description: "Rolling 7-day revenue (window: sum over rows between 6 preceding and current row)."
+    columns:
+      - name: date_day
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('dim_dates')
+              field: date_day
+      - name: rolling_7d_revenue_usd
+        tests:
+          - not_null
+
+  - name: fct_top_players_by_country
+    description: "Ранкінг гравців за revenue в межах країни (window: rank)."
+    columns:
+      - name: player_id
+        tests:
+          - not_null
+      - name: country_rank
+        tests:
+          - not_null
