@@ -11,6 +11,7 @@ x-airflow-common: &airflow-common
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
     AIRFLOW__CORE__FERNET_KEY: ""
     AIRFLOW__WEBSERVER__SECRET_KEY: "change_me"
+    AIRFLOW_CONN_MYSQL_GAME_DB: mysql://game_user:game_pass@mysql:3306/game_db
     PYTHONPATH: /opt/airflow
     DBT_PROFILES_DIR: /opt/airflow/dbt
     DBT_PROJECT_DIR: /opt/airflow/dbt
@@ -75,6 +76,18 @@ services:
   airflow-scheduler:
     <<: *airflow-common
     command: scheduler
+
+  dbt-docs:
+    <<: *airflow-common
+    entrypoint: /bin/bash
+    command:
+      - -lc
+      - |
+        cd /opt/airflow/dbt && \
+        dbt docs generate && \
+        dbt docs serve --host 0.0.0.0 --port 8081
+    ports:
+      - "8081:8081"
 
 volumes:
   postgres-db-volume:
