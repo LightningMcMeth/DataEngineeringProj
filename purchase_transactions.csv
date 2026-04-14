@@ -1,0 +1,54 @@
+transaction_id,player_id,transaction_timestamp,session_id,store_offer_id,product_sku,product_name,product_category,quantity,gross_amount,currency_code,payment_provider,payment_status,platform,country_code,is_first_purchase,created_at,updated_at
+txn_dc0fb3a08c55,100004,2026-04-03T10:33:52Z,sess_a6da531da1,offer_5,sku_special_offer_999,Special Offer,special_offer,1,9.99,USD,app_store,failed,ios,FR,1,2026-04-03T10:33:52Z,2026-04-03T10:34:06Z
+txn_4817a14dec9f,100008,2026-03-28T19:31:48Z,sess_c880b1f526,offer_21,sku_starter_9999,Starter,special_offer,1,99.99,USD,google_play,refunded,android,TR,1,2026-03-28T19:31:48Z,2026-03-28T19:32:33Z
+txn_23e07286b8bf,100020,2026-03-25T09:03:14Z,sess_ab46236c53,offer_13,sku_battle_pass_99,Battle Pass,battle_pass,1,0.99,USD,app_store,refunded,ios,UA,1,2026-03-25T09:03:14Z,2026-03-25T09:03:41Z
+txn_c8c99c40c878,100041,2026-04-01T11:04:35Z,sess_d725c82513,offer_15,sku_gem_pack_99,Gem Pack,gems,1,0.99,USD,app_store,completed,ios,US,1,2026-04-01T11:04:35Z,2026-04-01T11:05:33Z
+txn_42f6e6facb06,100041,2026-04-01T21:11:22Z,sess_d0929010cd,offer_3,sku_bundle_199,Bundle,bundle,1,1.99,USD,app_store,refunded,ios,US,0,2026-04-01T21:11:22Z,2026-04-01T21:12:14Z
+txn_87e8bc7876d2,100041,2026-04-02T09:05:40Z,sess_656be842d9,offer_30,sku_battle_pass_9999,Battle Pass,battle_pass,1,99.99,USD,app_store,refunded,ios,US,0,2026-04-02T09:05:40Z,2026-04-02T09:06:12Z
+txn_ec478b43cd17,100041,2026-04-04T19:49:29Z,sess_d3cdd48863,offer_28,sku_starter_1998,Starter,special_offer,1,19.99,USD,app_store,failed,ios,US,0,2026-04-04T19:49:29Z,2026-04-04T19:50:02Z
+txn_023121add066,100066,2026-04-03T15:08:38Z,sess_a7cfc9a527,offer_24,sku_battle_pass_4999,Battle Pass,battle_pass,1,49.99,USD,app_store,completed,ios,PL,1,2026-04-03T15:08:38Z,2026-04-03T15:09:14Z
+txn_b6f494be717c,100073,2026-03-28T15:08:55Z,sess_788f236233,offer_26,sku_battle_pass_499,Battle Pass,battle_pass,1,4.99,USD,app_store,completed,ios,IN,1,2026-03-28T15:08:55Z,2026-03-28T15:09:53Z
+txn_2a9ce8f35128,100083,2026-04-01T17:26:35Z,sess_8c592be438,offer_2,sku_gem_pack_1998,Gem Pack,gems,1,19.99,USD,google_play,completed,android,DE,1,2026-04-01T17:26:35Z,2026-04-01T17:26:46Z
+txn_94724e7b61a4,100088,2026-03-30T09:49:44Z,sess_badb9f4f66,offer_14,sku_battle_pass_4999,Battle Pass,battle_pass,1,49.99,USD,google_play,completed,android,PL,1,2026-03-30T09:49:44Z,2026-03-30T09:50:34Z
+txn_ca09e2c763b8,100088,2026-03-31T10:47:47Z,sess_3b8c4cf975,offer_5,sku_special_offer_1998,Special Offer,special_offer,1,19.99,USD,google_play,refunded,android,PL,0,2026-03-31T10:47:47Z,2026-03-31T10:48:00Z
+txn_716a1b0dfb07,100088,2026-04-06T16:55:14Z,sess_1a8aaa41e3,offer_6,sku_gem_pack_499,Gem Pack,gems,1,4.99,USD,google_play,completed,android,PL,0,2026-04-06T16:55:14Z,2026-04-06T16:56:10Z
+txn_fe7f1b64775c,100088,2026-04-11T17:08:47Z,sess_08a3976da2,offer_18,sku_gem_pack_499,Gem Pack,gems,1,4.99,USD,google_play,completed,android,PL,0,2026-04-11T17:08:47Z,2026-04-11T17:09:34Z
+txn_2ca54757f791,100088,2026-04-13T10:52:47Z,sess_68a8850395,offer_5,sku_gem_pack_9999,Gem Pack,gems,1,99.99,USD,google_play,completed,android,PL,0,2026-04-13T10:52:47Z,2026-04-13T10:53:29Z
+txn_2c5e5b416a9b,100096,2026-03-25T12:59:42Z,sess_ef0d827633,offer_3,sku_starter_199,Starter,special_offer,1,1.99,USD,google_play,refunded,android,IN,1,2026-03-25T12:59:42Z,2026-03-25T13:00:00Z
+txn_6129ecc04373,100101,2026-03-31T18:08:37Z,sess_d99e26bd64,offer_29,sku_bundle_4999,Bundle,bundle,1,49.99,USD,app_store,failed,ios,PL,1,2026-03-31T18:08:37Z,2026-03-31T18:08:41Z
+txn_324c6a6f2996,100101,2026-04-02T18:04:43Z,sess_3676c4db08,offer_2,sku_bundle_9999,Bundle,bundle,1,99.99,USD,app_store,completed,ios,PL,1,2026-04-02T18:04:43Z,2026-04-02T18:05:37Z
+txn_af143a303966,100101,2026-04-02T18:47:18Z,sess_431801d1b4,offer_2,sku_starter_199,Starter,special_offer,1,1.99,USD,app_store,completed,ios,PL,0,2026-04-02T18:47:18Z,2026-04-02T18:47:31Z
+txn_742db9b299c4,100104,2026-03-22T22:32:01Z,sess_655db203e4,offer_12,sku_battle_pass_1998,Battle Pass,battle_pass,1,19.99,USD,app_store,refunded,ios,UA,1,2026-03-22T22:32:01Z,2026-03-22T22:32:59Z
+txn_a2d6ae04fca4,100108,2026-03-31T13:37:06Z,sess_fd8f364999,offer_20,sku_gem_pack_499,Gem Pack,gems,1,4.99,USD,google_play,failed,android,AU,1,2026-03-31T13:37:06Z,2026-03-31T13:38:03Z
+txn_b3e15a7a2afb,100108,2026-04-04T19:43:09Z,sess_d2dcb9adb1,offer_4,sku_starter_99,Starter,special_offer,1,0.99,USD,google_play,completed,android,AU,1,2026-04-04T19:43:09Z,2026-04-04T19:43:23Z
+txn_71e5b82a43d1,100111,2026-04-01T10:44:22Z,sess_9af2db7003,offer_17,sku_bundle_4999,Bundle,bundle,1,49.99,USD,google_play,failed,android,JP,1,2026-04-01T10:44:22Z,2026-04-01T10:45:17Z
+txn_972cce637ff2,100111,2026-04-03T09:24:11Z,sess_7cf0cf7ee9,offer_23,sku_battle_pass_499,Battle Pass,battle_pass,1,4.99,USD,google_play,completed,android,JP,1,2026-04-03T09:24:11Z,2026-04-03T09:24:45Z
+txn_9bbc7543a222,100111,2026-04-04T16:29:43Z,sess_c7a1931a09,offer_30,sku_battle_pass_1998,Battle Pass,battle_pass,1,19.99,USD,google_play,completed,android,JP,0,2026-04-04T16:29:43Z,2026-04-04T16:30:22Z
+txn_2daace595240,100111,2026-04-06T23:46:18Z,sess_857ad71e42,offer_2,sku_special_offer_4999,Special Offer,special_offer,1,49.99,USD,google_play,completed,android,JP,0,2026-04-06T23:46:18Z,2026-04-06T23:46:26Z
+txn_0fc0a338dc25,100111,2026-04-07T10:49:25Z,sess_0e197762aa,offer_19,sku_battle_pass_999,Battle Pass,battle_pass,1,9.99,USD,google_play,completed,android,JP,0,2026-04-07T10:49:25Z,2026-04-07T10:50:00Z
+txn_489e54276ad3,100111,2026-04-09T23:07:49Z,sess_18414aa3e3,offer_13,sku_special_offer_99,Special Offer,special_offer,1,0.99,USD,google_play,refunded,android,JP,0,2026-04-09T23:07:49Z,2026-04-09T23:08:01Z
+txn_a13813ebd82b,100111,2026-04-09T16:02:22Z,sess_0c104f56c2,offer_3,sku_battle_pass_499,Battle Pass,battle_pass,1,4.99,USD,google_play,completed,android,JP,0,2026-04-09T16:02:22Z,2026-04-09T16:02:38Z
+txn_5abfb0523c01,100111,2026-04-10T15:39:45Z,sess_93dcdba886,offer_30,sku_battle_pass_499,Battle Pass,battle_pass,1,4.99,USD,google_play,failed,android,JP,0,2026-04-10T15:39:45Z,2026-04-10T15:40:12Z
+txn_bfe5dd66370d,100111,2026-04-10T20:57:54Z,sess_f24930a6e5,offer_21,sku_starter_199,Starter,special_offer,1,1.99,USD,google_play,completed,android,JP,0,2026-04-10T20:57:54Z,2026-04-10T20:58:47Z
+txn_ce26bb8c9268,100111,2026-04-11T21:59:35Z,sess_88f99a0798,offer_27,sku_special_offer_199,Special Offer,special_offer,1,1.99,USD,google_play,completed,android,JP,0,2026-04-11T21:59:35Z,2026-04-11T21:59:44Z
+txn_8cfae86d0a45,100111,2026-04-12T20:18:38Z,sess_c4e4be09c9,offer_11,sku_gem_pack_4999,Gem Pack,gems,1,49.99,USD,google_play,failed,android,JP,0,2026-04-12T20:18:38Z,2026-04-12T20:19:30Z
+txn_e29e24701fa7,100119,2026-03-18T16:03:32Z,sess_30f3d5ad6b,offer_27,sku_bundle_999,Bundle,bundle,1,9.99,USD,app_store,completed,ios,CA,1,2026-03-18T16:03:32Z,2026-03-18T16:04:10Z
+txn_d306a2c0609e,100128,2026-04-13T15:24:30Z,sess_2d31314d91,offer_20,sku_gem_pack_999,Gem Pack,gems,1,9.99,USD,app_store,completed,ios,PL,1,2026-04-13T15:24:30Z,2026-04-13T15:25:24Z
+txn_a4072897d09a,100144,2026-03-29T00:00:30Z,sess_e0d3466dc9,offer_24,sku_battle_pass_99,Battle Pass,battle_pass,1,0.99,USD,app_store,completed,ios,FR,1,2026-03-29T00:00:30Z,2026-03-29T00:00:48Z
+txn_f9ebe4ed6306,100144,2026-03-29T16:34:57Z,sess_4d1a58903b,offer_22,sku_gem_pack_99,Gem Pack,gems,1,0.99,USD,app_store,refunded,ios,FR,0,2026-03-29T16:34:57Z,2026-03-29T16:35:43Z
+txn_9a6b755dab16,100144,2026-03-31T09:50:05Z,sess_bb9e72e501,offer_24,sku_battle_pass_199,Battle Pass,battle_pass,1,1.99,USD,app_store,completed,ios,FR,0,2026-03-31T09:50:05Z,2026-03-31T09:50:33Z
+txn_d2da076b5b28,100144,2026-03-31T11:34:28Z,sess_f8e2473c00,offer_4,sku_gem_pack_499,Gem Pack,gems,1,4.99,USD,app_store,failed,ios,FR,0,2026-03-31T11:34:28Z,2026-03-31T11:34:35Z
+txn_d30229af194b,100155,2026-04-10T15:46:58Z,sess_6fcbfc2742,offer_22,sku_bundle_499,Bundle,bundle,1,4.99,USD,app_store,completed,ios,GB,1,2026-04-10T15:46:58Z,2026-04-10T15:47:45Z
+txn_2e912a3dcefb,100155,2026-04-11T10:36:52Z,sess_d44b0b4924,offer_9,sku_gem_pack_99,Gem Pack,gems,1,0.99,USD,app_store,completed,ios,GB,0,2026-04-11T10:36:52Z,2026-04-11T10:37:03Z
+txn_33d088a1f5ce,100189,2026-03-31T22:44:58Z,sess_709aaf96f1,offer_5,sku_bundle_499,Bundle,bundle,1,4.99,USD,app_store,refunded,ios,UA,1,2026-03-31T22:44:58Z,2026-03-31T22:45:42Z
+txn_2ba93c3a193d,100189,2026-04-02T20:29:58Z,sess_dd23b4c588,offer_8,sku_special_offer_499,Special Offer,special_offer,1,4.99,USD,app_store,completed,ios,UA,1,2026-04-02T20:29:58Z,2026-04-02T20:30:42Z
+txn_806aa3c3e6cf,100204,2026-03-27T00:26:19Z,sess_c59bce170f,offer_27,sku_battle_pass_4999,Battle Pass,battle_pass,1,49.99,USD,app_store,completed,ios,PL,1,2026-03-27T00:26:19Z,2026-03-27T00:26:41Z
+txn_062f90d8a855,100204,2026-03-28T13:22:05Z,sess_b537cb9520,offer_20,sku_gem_pack_499,Gem Pack,gems,1,4.99,USD,app_store,refunded,ios,PL,0,2026-03-28T13:22:05Z,2026-03-28T13:22:57Z
+txn_01e12490c26b,100205,2026-04-08T09:21:07Z,sess_eaaf0fb1ec,offer_28,sku_special_offer_1998,Special Offer,special_offer,1,19.99,USD,app_store,completed,ios,TR,1,2026-04-08T09:21:07Z,2026-04-08T09:22:07Z
+txn_c2172c3d888f,100205,2026-04-12T13:46:25Z,sess_ccd161111f,offer_22,sku_starter_9999,Starter,special_offer,1,99.99,USD,app_store,completed,ios,TR,0,2026-04-12T13:46:25Z,2026-04-12T13:46:31Z
+txn_e248a9beec37,100219,2026-03-31T15:11:34Z,sess_0be7fdba76,offer_18,sku_bundle_4999,Bundle,bundle,1,49.99,USD,app_store,refunded,ios,DE,1,2026-03-31T15:11:34Z,2026-03-31T15:12:23Z
+txn_936991e98b28,100220,2026-03-25T14:06:02Z,sess_6bb50e8ac1,offer_3,sku_gem_pack_4999,Gem Pack,gems,1,49.99,USD,google_play,completed,android,US,1,2026-03-25T14:06:02Z,2026-03-25T14:06:17Z
+txn_9dfc64dd82e1,100220,2026-03-26T19:20:43Z,sess_89e8eab9a9,offer_30,sku_gem_pack_99,Gem Pack,gems,1,0.99,USD,google_play,completed,android,US,0,2026-03-26T19:20:43Z,2026-03-26T19:21:36Z
+txn_ee06e8642b96,100220,2026-03-31T17:54:47Z,sess_a6600be675,offer_6,sku_special_offer_99,Special Offer,special_offer,1,0.99,USD,google_play,failed,android,US,0,2026-03-31T17:54:47Z,2026-03-31T17:55:35Z
+txn_695f3f8a2b4a,100243,2026-03-25T23:49:48Z,sess_09d749d3a7,offer_6,sku_gem_pack_4999,Gem Pack,gems,1,49.99,USD,app_store,refunded,ios,US,1,2026-03-25T23:49:48Z,2026-03-25T23:50:29Z
+txn_e8013f02f210,100243,2026-03-26T15:04:33Z,sess_1c944eec83,offer_7,sku_gem_pack_199,Gem Pack,gems,1,1.99,USD,app_store,completed,ios,US,1,2026-03-26T15:04:33Z,2026-03-26T15:05:02Z
