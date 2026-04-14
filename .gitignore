@@ -1,30 +1,7 @@
-# Python cache
-__pycache__/
-*.py[cod]
-
-# Virtual environments
-.venv/
-venv/
-env/
-
-# Local environment / secrets
-.env
-
-# Airflow logs and local runtime output
 logs/
-airflow-webserver.pid
-airflow-scheduler.pid
-
-# Generated DuckDB database
 duckdb/*.duckdb
-*.duckdb
-*.wal
-
-# Generated telephony JSON files
-data/telephony/*.json
-
-# OS / editor noise
+.env
+__pycache__/
 .DS_Store
-Thumbs.db
-.vscode/
-.idea/
+dbt/target/
+dbt/dbt_packages/

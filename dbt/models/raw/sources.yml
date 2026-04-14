@@ -1,0 +1,48 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Raw-шар у DuckDB, куди Airflow складає дані з MySQL і JSON-подій."
+    schema: raw
+    tables:
+      - name: purchase_transactions
+        description: "Сирі транзакції з MySQL (game_db.purchase_transactions)."
+        columns:
+          - name: transaction_id
+            description: "Первинний ключ транзакції."
+            tests:
+              - not_null
+              - unique
+          - name: player_id
+            tests:
+              - not_null
+          - name: transaction_timestamp
+            tests:
+              - not_null
+          - name: gross_amount
+            tests:
+              - not_null
+          - name: currency_code
+            tests:
+              - not_null
+          - name: payment_status
+            tests:
+              - not_null
+
+      - name: events
+        description: "Сирі ігрові події (NDJSON) завантажені з data/raw/game_events.json."
+        columns:
+          - name: event_id
+            description: "Унікальний ідентифікатор події."
+            tests:
+              - not_null
+              - unique
+          - name: event_name
+            tests:
+              - not_null
+          - name: event_timestamp
+            tests:
+              - not_null
+          - name: player_id
+            tests:
+              - not_null

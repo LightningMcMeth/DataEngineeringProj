@@ -1,0 +1,30 @@
+name: game_analytics
+version: "1.0.0"
+config-version: 2
+
+profile: game_analytics
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+
+clean-targets:
+  - target
+  - dbt_packages
+
+models:
+  game_analytics:
+    raw:
+      +materialized: view
+      +schema: raw
+    stg:
+      +materialized: view
+      +schema: stg
+    mart:
+      +materialized: table
+      +schema: mart
+
+seeds:
+  game_analytics:
+    +schema: seeds
