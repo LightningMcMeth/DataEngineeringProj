@@ -15,6 +15,11 @@ x-airflow-common: &airflow-common
     PYTHONPATH: /opt/airflow
     DBT_PROFILES_DIR: /opt/airflow/dbt
     DBT_PROJECT_DIR: /opt/airflow/dbt
+    # MinIO (S3-сумісне сховище для довідкових CSV замість dbt seeds)
+    MINIO_ENDPOINT: minio:9000
+    MINIO_ACCESS_KEY: minioadmin
+    MINIO_SECRET_KEY: minioadmin
+    MINIO_BUCKET: game-analytics-seeds
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
@@ -28,6 +33,7 @@ x-airflow-common: &airflow-common
   depends_on:
     - postgres
     - mysql
+    - minio
 
 services:
   postgres:
@@ -51,6 +57,37 @@ services:
       - "3307:3306"
     volumes:
       - ./include/sql/mysql:/docker-entrypoint-initdb.d
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "9000:9000"   # S3 API
+      - "9001:9001"   # web-консоль
+    volumes:
+      - minio-data:/data
+
+  # Одноразовий контейнер: створює bucket і заливає CSV-довідники з ./data/seeds/
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      sleep 5;
+      mc alias set local http://minio:9000 minioadmin minioadmin;
+      mc mb --ignore-existing local/game-analytics-seeds;
+      mc cp /seeds/country_codes.csv local/game-analytics-seeds/;
+      mc cp /seeds/product_category_groups.csv local/game-analytics-seeds/;
+      mc cp /seeds/platform_os_family.csv local/game-analytics-seeds/;
+      mc cp /seeds/fx_rates.csv local/game-analytics-seeds/;
+      echo 'seeds uploaded to MinIO';
+      "
+    volumes:
+      - ./data/seeds:/seeds:ro
 
   airflow-init:
     <<: *airflow-common
@@ -91,3 +128,4 @@ services:
 
 volumes:
   postgres-db-volume:
+  minio-data:

@@ -2,9 +2,66 @@ version: 2
 
 sources:
   - name: raw
-    description: "Raw-шар у DuckDB, куди Airflow складає дані з MySQL і JSON-подій."
+    description: "Raw-шар у DuckDB, куди Airflow складає дані з MySQL, JSON-подій і MinIO-довідників."
     schema: raw
     tables:
+      - name: country_codes
+        description: "Довідник країн (ISO2 → name, region). Завантажується з MinIO (bucket game-analytics-seeds)."
+        columns:
+          - name: country_code
+            tests:
+              - not_null
+              - unique
+          - name: country_name
+            tests:
+              - not_null
+          - name: region
+            tests:
+              - not_null
+              - accepted_values:
+                  values: ['NA', 'LATAM', 'EU', 'APAC']
+
+      - name: product_category_groups
+        description: "Мапінг product_category → бізнесова група категорій. Завантажується з MinIO."
+        columns:
+          - name: product_category
+            tests:
+              - not_null
+              - unique
+          - name: category_group
+            tests:
+              - not_null
+              - accepted_values:
+                  values: ['hard_currency', 'soft_currency', 'promotional', 'subscription', 'cosmetic']
+          - name: is_subscription
+            tests:
+              - not_null
+
+      - name: platform_os_family
+        description: "Мапінг platform → OS family, прапорець mobile. Завантажується з MinIO."
+        columns:
+          - name: platform
+            tests:
+              - not_null
+              - unique
+          - name: os_family
+            tests:
+              - not_null
+          - name: is_mobile
+            tests:
+              - not_null
+
+      - name: fx_rates
+        description: "Курси валют до USD. Статичний довідник, лежить у MinIO."
+        columns:
+          - name: currency_code
+            tests:
+              - not_null
+              - unique
+          - name: rate_to_usd
+            tests:
+              - not_null
+
       - name: purchase_transactions
         description: "Сирі транзакції з MySQL (game_db.purchase_transactions)."
         columns:

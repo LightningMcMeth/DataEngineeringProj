@@ -13,7 +13,7 @@ WITH completed_tx AS (
         p.player_id,
         p.gross_amount * fx.rate_to_usd AS gross_usd
     FROM {{ ref('stg_purchases') }} AS p
-    LEFT JOIN {{ ref('fx_rates') }} AS fx ON p.currency_code = fx.currency_code
+    LEFT JOIN {{ source('raw', 'fx_rates') }} AS fx ON p.currency_code = fx.currency_code
     WHERE p.payment_status = 'completed'
 
 )

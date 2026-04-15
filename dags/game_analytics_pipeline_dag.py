@@ -1,8 +1,11 @@
 """
-Hourly DAG: ETL з MySQL + JSON у DuckDB raw-шар, потім dbt build для моделей
+Hourly DAG: ETL з MinIO + MySQL + JSON у DuckDB raw-шар, потім dbt build для моделей
 з тегом 'hourly' (весь stg-шар + операційні mart-моделі як fct_daily_revenue).
 
 Паралельно з цим DAG-ом існує game_analytics_daily для важких агрегацій.
+
+Замість dbt seeds довідкові CSV тепер вантажаться з MinIO (S3-сумісне сховище)
+окремою таскою load_minio_to_duckdb → raw.country_codes, raw.fx_rates тощо.
 """
 
 from datetime import datetime, timedelta
@@ -15,6 +18,7 @@ sys.path.append("/opt/airflow/scripts")
 
 import my_sql_to_duck as extract_mysql_to_duckdb
 import load_json_to_duck as load_json_to_duckdb
+import load_minio_to_duck as load_minio_to_duckdb
 
 default_args = {
     "owner": "data-eng",
@@ -24,7 +28,7 @@ default_args = {
 
 with DAG(
     dag_id="game_analytics_hourly",
-    description="ETL → DuckDB raw + dbt build tag:hourly",
+    description="ETL (MinIO + MySQL + JSON) → DuckDB raw + dbt build tag:hourly",
     start_date=datetime(2026, 4, 1),
     schedule="@hourly",
     catchup=False,
@@ -32,6 +36,12 @@ with DAG(
     default_args=default_args,
     tags=["elt", "game_analytics", "hourly"],
 ) as dag:
+
+    # Завантажуємо довідкові CSV з MinIO у raw.* (country_codes, fx_rates, ...).
+    t_load_minio = PythonOperator(
+        task_id="load_minio_to_duckdb",
+        python_callable=load_minio_to_duckdb.run,
+    )
 
     t_extract_mysql = PythonOperator(
         task_id="extract_mysql_to_duckdb",
@@ -43,13 +53,7 @@ with DAG(
         python_callable=load_json_to_duckdb.run,
     )
 
-    # Seeds вантажимо один раз за ран; якщо CSV не змінився, це швидкий no-op.
-    t_dbt_seed = BashOperator(
-        task_id="dbt_seed",
-        bash_command="cd /opt/airflow/dbt && dbt seed --target dev",
-    )
-
-    # dbt build = run + test + seed + snapshot, обмежений тегом 'hourly'.
+    # dbt build = run + test + snapshot, обмежений тегом 'hourly'.
     # DBT_PROFILES_DIR і DBT_PROJECT_DIR задані в docker-compose.yml.
     t_dbt_build_hourly = BashOperator(
         task_id="dbt_build_hourly",
@@ -59,4 +63,4 @@ with DAG(
         ),
     )
 
-    t_extract_mysql >> t_load_json >> t_dbt_seed >> t_dbt_build_hourly
+    t_load_minio >> t_extract_mysql >> t_load_json >> t_dbt_build_hourly

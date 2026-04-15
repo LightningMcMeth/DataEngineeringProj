@@ -22,14 +22,14 @@ models:
       - name: country_code
         tests:
           - relationships:
-              to: ref('country_codes')
+              to: source('raw', 'country_codes')
               field: country_code
               config:
                 severity: warn
       - name: platform
         tests:
           - relationships:
-              to: ref('platform_os_family')
+              to: source('raw', 'platform_os_family')
               field: platform
               config:
                 severity: warn
@@ -48,7 +48,7 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('product_category_groups')
+              to: source('raw', 'product_category_groups')
               field: product_category
               config:
                 severity: warn

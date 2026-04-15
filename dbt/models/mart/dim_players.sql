@@ -63,5 +63,5 @@ SELECT
     j.total_gross_usd,
     j.first_purchase_ts
 FROM joined AS j
-LEFT JOIN {{ ref('country_codes') }} AS c ON j.country_code = c.country_code
-LEFT JOIN {{ ref('platform_os_family') }} AS pf ON j.platform = pf.platform
+LEFT JOIN {{ source('raw', 'country_codes') }} AS c ON j.country_code = c.country_code
+LEFT JOIN {{ source('raw', 'platform_os_family') }} AS pf ON j.platform = pf.platform

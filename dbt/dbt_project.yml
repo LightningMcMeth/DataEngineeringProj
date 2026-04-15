@@ -5,9 +5,10 @@ config-version: 2
 profile: game_analytics
 
 model-paths: ["models"]
-seed-paths: ["seeds"]
 test-paths: ["tests"]
 macro-paths: ["macros"]
+# seeds прибрані: довідкові CSV тепер живуть у MinIO і вантажаться
+# в схему `raw` DuckDB Airflow-таскою load_minio_to_duckdb.
 
 clean-targets:
   - target
@@ -26,7 +27,3 @@ models:
       +materialized: table
       +schema: mart
       +tags: ['daily']
-
-seeds:
-  game_analytics:
-    +schema: seeds

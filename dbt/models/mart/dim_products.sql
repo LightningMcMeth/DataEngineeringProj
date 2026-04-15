@@ -25,4 +25,4 @@ SELECT
     s.times_sold,
     s.total_gross_usd
 FROM sku_base AS s
-LEFT JOIN {{ ref('product_category_groups') }} AS g ON s.product_category = g.product_category
+LEFT JOIN {{ source('raw', 'product_category_groups') }} AS g ON s.product_category = g.product_category
