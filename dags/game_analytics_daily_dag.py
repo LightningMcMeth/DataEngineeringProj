@@ -9,7 +9,13 @@ Schedule: '15 3 * * *' — о 3:15 ночі локального часу, що�
 
 from datetime import datetime, timedelta
 from airflow import DAG
+from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
+
+import sys
+sys.path.append("/opt/airflow/scripts")
+
+import generate_analytics_summary
 
 default_args = {
     "owner": "data-eng",
@@ -36,4 +42,9 @@ with DAG(
         ),
     )
 
-    t_dbt_build_daily
+    t_generate_analytics_summary = PythonOperator(
+        task_id="generate_analytics_summary",
+        python_callable=generate_analytics_summary.run,
+    )
+
+    t_dbt_build_daily >> t_generate_analytics_summary

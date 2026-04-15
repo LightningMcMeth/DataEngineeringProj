@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-04-15T11:49:42.598470+00:00",
+  "overall": {
+    "players": 250.0,
+    "payers": 17.0,
+    "payer_rate_pct": 6.8
+  },
+  "top_channel": {
+    "acquisition_channel": "ad_campaign",
+    "players": 70,
+    "payers": 8.0,
+    "payer_rate_pct": 11.43,
+    "revenue_usd": 287.84,
+    "revenue_per_payer_usd": 35.98
+  },
+  "top_country": {
+    "country_name": "Poland",
+    "revenue_usd": 371.91,
+    "revenue_share_pct": 53.92
+  },
+  "top_country_player": {
+    "country_name": "Poland",
+    "player_id": 100088,
+    "revenue_usd": 159.96,
+    "purchase_count": 4,
+    "pct_of_country_revenue": 43.01
+  },
+  "top_day": {
+    "date_day": "2026-04-13 00:00:00",
+    "gross_revenue_usd": 109.98,
+    "orders": 2,
+    "unique_payers": 2
+  },
+  "top_rolling_window": {
+    "date_day": "2026-04-07 00:00:00",
+    "rolling_7d_revenue_usd": 268.88,
+    "rolling_7d_orders": 12.0
+  },
+  "insights": [
+    {
+      "title": "Which acquisition channel converts best?\n\n",
+      "summary": "ad_campaign has the strongest payer conversion: 8 payers out of 70 players (11.43%), versus an overall payer rate of 6.80%."
+    },
+    {
+      "title": "Which market contributes the most revenue?\n\n",
+      "summary": "Poland is the top market with $371.91 or 53.92% of total revenue. Its top spender is player 100088, who generated $159.96 across 4 purchases and accounts for 43.01% of that country's revenue."
+    },
+    {
+      "title": "How concentrated is recent revenue?\n\n",
+      "summary": "The highest single-day revenue was $109.98 on 2026-04-13 00:00:00, produced by 2 orders from 2 payers. The strongest 7-day window reached $268.88 by 2026-04-07 00:00:00 across 12 rolling orders."
+    }
+  ]
+}
